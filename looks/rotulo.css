@@ -1,0 +1,40 @@
+/* RÓTULO — tabela nutricional: caixa preta, filetes grossos, Archivo */
+body{background:var(--acc)}
+.panel{background:#fff;color:#111;border:7px solid #111;padding:«30» «36» «36»;font-family:'Arch'}
+.chandle{font:800 «30» 'Arch';font-stretch:80%;color:var(--fg)}
+.hd.pill{font-family:'Arch'}
+.panel>*+*{border-top:«14» solid #111;padding-top:«18»;margin-top:«18»}
+.cstat{border-bottom:none}
+.cstat b{font-family:'Arch';font-weight:900;font-stretch:75%;font-size:«200»;letter-spacing:-.03em}
+.cstat>span{font:700 «34»/1.1 'Arch'}
+h1{font-family:'Arch';font-weight:900;font-stretch:72%;letter-spacing:-.01em;line-height:.98}
+.turn{border-bottom:.08em solid #111}
+.lead{font-family:'Arch';font-weight:900;font-stretch:75%;font-size:«88»;line-height:.98;letter-spacing:-.01em}
+.rest{font-family:'Arch';font-weight:500;font-size:«46»;line-height:1.22}
+p+p{border-top:4px solid #111;padding-top:«22»}
+mark{background:#111;color:#fff;padding:0 .12em}
+.big p{font-family:'Arch';font-weight:900;font-stretch:72%;line-height:.96;letter-spacing:-.01em}
+.hi{background:#111;color:#fff;padding:0 .08em;box-decoration-break:clone}
+.rnum{font-family:'Arch';font-weight:900;font-stretch:75%;letter-spacing:-.04em}
+.rtext{font-family:'Arch';font-weight:700;font-size:«54»;border-top:«14» solid #111;padding-top:«20»}
+.vtitle{font-family:'Arch';font-weight:900;font-stretch:75%;font-size:«64»;line-height:1;margin-bottom:«10»}
+.vrow{display:grid;grid-template-columns:1fr auto;align-items:baseline;border-top:4px solid #111;padding-top:«14»;margin-top:«14»!important}
+.vlab{font-family:'Arch';font-weight:700;font-size:«40»}
+.vnum{font-family:'Arch';font-weight:900;font-size:«80»;font-stretch:80%}
+.vbar{grid-column:1/3;height:«18»;background:#e4e4e4}
+.vnote{font-family:'Arch';font-size:«42»;border-top:«14» solid #111;padding-top:«18»}
+.chat .bub{background:#fff;color:#111;border:6px solid #111;font-family:'Arch';font-weight:600;font-size:«48»}
+.chat .msg.right .bub{background:#111;color:#fff}
+.msg small,.clab{font-family:'Arch';font-weight:800;color:var(--fg)}
+.clab{background:#fff;color:#111;border:4px solid #111;padding:6px 14px}
+.ccap{font-family:'Arch';font-weight:900;font-stretch:75%;background:#fff;color:#111;border:6px solid #111;padding:14px 22px}
+.clead{font-family:'Arch';font-weight:800;font-size:«50»}
+.comente{font-family:'Arch';font-weight:900;font-stretch:72%;font-size:«180»;text-transform:uppercase}
+.kw{border-top:none!important;margin-top:«6»!important;padding-top:0!important}
+.kw span{font-family:'Arch';font-weight:900;font-stretch:75%;background:#111;color:#fff;padding:.04em .2em}
+.sub{font-family:'Arch';font-size:«40»}
+.fol p{font-family:'Arch';font-weight:900;font-stretch:75%;line-height:1}
+.fh{background:#111;color:#fff;padding:0 .1em}
+.grid i{border-radius:0;background:#fff;border:4px solid #111}
+.grid i.on{background:#111}
+.swipe{background:#fff;color:#111;border:5px solid #111;padding:8px 18px;font-family:'Arch'}

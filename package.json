@@ -1,0 +1,17 @@
+{
+  "name": "carrosseis-render",
+  "private": true,
+  "description": "Fontes do renderizador de carrosséis",
+  "dependencies": {
+    "@fontsource-variable/archivo": "^5",
+    "@fontsource-variable/big-shoulders-display": "^5",
+    "@fontsource-variable/bricolage-grotesque": "^5",
+    "@fontsource-variable/pixelify-sans": "^5",
+    "@fontsource-variable/red-hat-mono": "^5",
+    "@fontsource/bangers": "^5",
+    "@fontsource/gloock": "^5",
+    "@fontsource/kalam": "^5",
+    "@fontsource/permanent-marker": "^5",
+    "@fontsource/special-elite": "^5"
+  }
+}

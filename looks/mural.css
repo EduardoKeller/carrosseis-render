@@ -1,0 +1,38 @@
+/* MURAL — quadro de cortiça com post-its e alfinete */
+body{background-color:#B5875A;background-image:radial-gradient(rgba(70,40,15,.35) 1.5px,transparent 2px),radial-gradient(rgba(255,230,190,.25) 1px,transparent 1.5px);
+  background-size:14px 14px,9px 9px;background-position:0 0,5px 7px}
+.panel{background:#FFE873;color:#121212;padding:«70» «56» «56»;box-shadow:0 26px 30px -18px rgba(0,0,0,.55);transform:rotate(-1.6deg)}
+.t-story .panel,.t-follow .panel{background:#FFC7DC;transform:rotate(1.4deg)}
+.t-reveal .panel,.t-cta .panel{background:#BFE3FF;transform:rotate(-.8deg)}
+.t-versus .panel,.t-dots .panel{background:#FFFFFF;transform:rotate(.9deg)}
+.pin{position:absolute;left:50%;top:-22px;width:46px;height:46px;margin-left:-23px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#ff9a9a,#d62828 55%,#8a1010);box-shadow:0 8px 10px -4px rgba(0,0,0,.5)}
+.chandle{font:400 «40» 'Marker';color:#121212;background:#fff;padding:6px 18px;transform:rotate(-3deg)}
+.hd.pill{font-family:'Marker';font-weight:400}
+.cstat b{font-family:'Marker';font-weight:400;font-size:«190»;color:#121212}
+.cstat>span{font:400 «36»/1.1 'Marker'}
+h1{font-family:'Marker';font-weight:400;line-height:1.08;letter-spacing:0}
+.turn{color:#B3261E}
+.lead{font-family:'Marker';font-weight:400;font-size:«70»;line-height:1.12;letter-spacing:0}
+.rest{font-weight:560;font-size:«48»;line-height:1.24;color:#262626}
+mark{background:rgba(255,255,255,.75)}
+.big p{font-family:'Marker';font-weight:400;line-height:1.06;letter-spacing:0}
+.hi{color:#B3261E}
+.rnum{font-family:'Marker';font-weight:400;color:#121212}
+.rtext{font-weight:700;font-size:«54»}
+.vtitle{font-family:'Marker';font-weight:400;font-size:«56»}
+.vnum{font-family:'Marker';font-weight:400}
+.vbar{background:#ececec}
+.chat .bub{background:#FFE873;color:#121212;box-shadow:0 18px 22px -14px rgba(0,0,0,.5);font-weight:600}
+.chat .msg.right .bub{background:#BFE3FF}
+.chat .msg.left{transform:rotate(-1.5deg)} .chat .msg.right{transform:rotate(1.5deg)}
+.msg small{font-family:'Marker';color:#121212;background:#fff;padding:2px 12px}
+.clab{font-family:'Marker';background:#fff;padding:6px 16px}
+.ccap{font-family:'Marker';font-weight:400;background:#fff;padding:14px 22px;transform:rotate(-1deg)}
+.comente{font-family:'Marker';font-weight:400;font-size:«150»}
+.kw span{font-family:'Marker';font-weight:400;color:#B3261E;border-bottom:8px solid #B3261E}
+.fol p{font-family:'Marker';font-weight:400;line-height:1.1}
+.fh{color:#B3261E}
+.grid i{background:#fff;border:4px solid #121212}
+.grid i.on{background:#B3261E;border-color:#B3261E}
+.swipe{background:#fff;color:#121212;padding:8px 18px;font-family:'Marker';font-weight:400}

@@ -1,0 +1,35 @@
+/* PIXEL — RPG 8 bits: caixas de diálogo com borda dupla, fonte pixelada */
+body{background:#1A1C2C;background-image:radial-gradient(#3b3f5e 1.6px,transparent 2px);background-size:36px 36px;image-rendering:pixelated}
+.panel{background:#0E0F1A;color:#F4F4F4;border:6px solid #F4F4F4;outline:6px solid #0E0F1A;box-shadow:0 0 0 12px #5A6080;padding:«46» «44»;font-family:'Pix'}
+.chandle{font:600 «32» 'Pix';color:#F4F4F4}
+.hd{font-family:'Pix'}
+.cstat b{font-family:'Pix';font-weight:700;font-size:«190»;color:var(--acc);letter-spacing:0}
+.cstat>span{font:500 «34»/1.1 'Pix';color:#F4F4F4}
+h1{font-family:'Pix';font-weight:600;letter-spacing:0;line-height:1.08}
+.turn{color:var(--acc)}
+.lead{font-family:'Pix';font-weight:600;font-size:«68»;line-height:1.1;letter-spacing:0}
+.rest{font-family:'Pix';font-weight:400;font-size:«46»;line-height:1.3;color:#D6D9E8}
+mark{background:var(--acc);color:#0E0F1A}
+.big p{font-family:'Pix';font-weight:700;letter-spacing:0;line-height:1.06}
+.hi{color:var(--acc)}
+.rnum{font-family:'Pix';font-weight:700;color:var(--acc);letter-spacing:0}
+.rtext{font-family:'Pix';font-weight:500;font-size:«52»;color:#F4F4F4}
+.vtitle{font-family:'Pix';font-weight:600;font-size:«52»}
+.vlab{font-family:'Pix';color:#B8BDD6} .vnum{font-family:'Pix';font-weight:700;font-size:«120»;color:#F4F4F4!important}
+.vbar{background:#2A2D44;height:«34»} .vbar i{background-image:repeating-linear-gradient(90deg,transparent 0 22px,#0E0F1A 22px 26px)}
+.vnote{font-family:'Pix';color:#F4F4F4}
+.chat .bub{font-family:'Pix';font-weight:500;background:#0E0F1A;color:#F4F4F4;border:5px solid #F4F4F4;font-size:«46»}
+.chat .msg.right .bub{border-color:var(--acc)}
+.msg small{font-family:'Pix';color:var(--acc);font-size:«32»}
+.clab{font-family:'Pix';color:#F4F4F4;background:#5A6080;padding:6px 14px}
+.ccap{font-family:'Pix';font-weight:600;color:#F4F4F4}
+.clead{font-family:'Pix';font-weight:500}
+.comente{font-family:'Pix';font-weight:700;font-size:«150»}
+.kw span{font-family:'Pix';font-weight:700;color:#0E0F1A;background:var(--acc);padding:.04em .2em}
+.sub{font-family:'Pix';color:#D6D9E8}
+.fol p{font-family:'Pix';font-weight:600;line-height:1.12}
+.fh{color:var(--acc)}
+.grid i{border-radius:0;background:#2A2D44}
+.grid i.on{background:var(--acc)}
+.swipe{font-family:'Pix';font-weight:600;color:#F4F4F4}
+.next,.hd{font-family:'Pix'}

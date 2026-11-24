@@ -1,0 +1,33 @@
+/* TABLOIDE — capa de jornal popular: faixa de título, caixa alta condensada, filetes grossos */
+body{background:#F5F5F3}
+.chandle{left:0;right:0;top:0;height:calc(var(--pt) - 10px);display:flex;align-items:flex-end;padding:0 var(--px) 12px;background:var(--acc);
+  color:var(--on);font:900 «34» 'Big';letter-spacing:.06em;text-transform:uppercase}
+body.t-cover .wrap{padding-top:calc(var(--pt) + 20px)}
+.panel{border-top:«14» solid #111;padding-top:«26»}
+.cstat b{font-family:'Big';font-weight:900;font-size:«250»;color:var(--acct);letter-spacing:-.01em}
+.cstat>span{font:800 «38»/1.02 'Big';text-transform:uppercase}
+h1{font-family:'Big';font-weight:900;line-height:.97;letter-spacing:0;color:#111}
+.turn{background:#FFE14D;padding:0 .06em;box-decoration-break:clone}
+.lead{font-family:'Big';font-weight:900;text-transform:uppercase;font-size:«104»;line-height:.9;letter-spacing:0}
+.rest{font-family:'Gloock';font-size:«48»;line-height:1.24;color:#222;columns:1}
+mark{background:#FFE14D}
+.big p{font-family:'Big';font-weight:900;line-height:.96;letter-spacing:0}
+.hi{background:#FFE14D;padding:0 .05em;box-decoration-break:clone}
+.rnum{font-family:'Big';font-weight:900;color:var(--acct)}
+.rtext{font-family:'Big';font-weight:800;text-transform:uppercase;font-size:«72»;line-height:.95}
+.vtitle{font-family:'Big';font-weight:900;text-transform:uppercase;font-size:«72»;line-height:.92}
+.vnum{font-family:'Big';font-weight:900;font-size:«170»} .vlab{font-family:'Big';font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.vbar{background:#dedede;height:«36»}
+.bub{background:#fff;color:#111;border:4px solid #111;font-family:'Gloock';font-weight:400}
+.msg.right .bub{background:#111;color:#fff}
+.msg small,.clab{font-family:'Big';font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#111}
+.ccap{font-family:'Big';font-weight:900;text-transform:uppercase;line-height:.92}
+.clead{font-family:'Big';font-weight:800;text-transform:uppercase;font-size:«62»;line-height:.95}
+.comente{font-family:'Big';font-weight:900;font-size:«250»;text-transform:uppercase;line-height:.84}
+.kw span{font-family:'Big';font-weight:900;background:var(--acc);color:var(--on);padding:.02em .16em}
+.sub{font-family:'Gloock';font-weight:400}
+.fol p{font-family:'Big';font-weight:900;line-height:.98}
+.fh{background:var(--acc);color:var(--on);padding:0 .08em}
+.grid i{border-radius:0;background:#dcdcdc}
+.grid i.on{background:#111}
+.swipe{font-family:'Big';font-size:«34»;color:#111}

@@ -1,0 +1,31 @@
+/* QUADRINHO — HQ: quadros com contorno grosso, retícula, balões */
+body{background-color:var(--acc);background-image:radial-gradient(rgba(18,18,18,.22) 22%,transparent 24%);background-size:22px 22px}
+.panel{background:#fff;color:#121212;border:8px solid #121212;padding:«54» «50»;box-shadow:14px 14px 0 #121212;transform:rotate(-1.2deg)}
+.chandle{font:400 «40» 'Bang';letter-spacing:.06em;background:#121212;color:#fff;padding:4px 16px;transform:rotate(-3deg)}
+.hd.pill{font-family:'Bang';font-size:28px;letter-spacing:.06em}
+.cstat b{font-family:'Bang';font-weight:400;font-size:«200»;color:var(--acct);letter-spacing:.01em;-webkit-text-stroke:3px #121212}
+.cstat>span{font:400 «40»/1.05 'Bang';letter-spacing:.04em}
+h1{font-family:'Bang';font-weight:400;letter-spacing:.02em;line-height:1}
+.turn{background:#FFE14D;padding:0 .1em;box-decoration-break:clone}
+.lead{font-family:'Bang';font-weight:400;font-size:«82»;letter-spacing:.02em;line-height:1.02}
+.rest{font-weight:620;font-size:«48»;line-height:1.24}
+.big .panel{background:#FFE14D;transform:rotate(1.5deg)}
+.big p{font-family:'Bang';font-weight:400;letter-spacing:.02em;line-height:1}
+.hi{color:var(--acct)}
+.rnum{font-family:'Bang';font-weight:400;color:var(--acct);-webkit-text-stroke:4px #121212;letter-spacing:.01em}
+.rtext{font-weight:700;font-size:«54»}
+.vtitle{font-family:'Bang';font-weight:400;letter-spacing:.02em;font-size:«64»}
+.vnum{font-family:'Bang';font-weight:400}
+.vbar{border:5px solid #121212;background:#fff;height:«40»}
+.chat .bub{background:#fff;color:#121212;border:6px solid #121212;border-radius:50px;font-weight:650;box-shadow:8px 8px 0 #121212}
+.chat .msg.right .bub{background:#FFE14D}
+.msg small{font:400 «32» 'Bang';letter-spacing:.06em;color:#121212}
+.clab{font:400 «32» 'Bang';background:#121212;color:#fff;padding:6px 16px;letter-spacing:.06em}
+.ccap{font-family:'Bang';font-weight:400;background:#fff;color:#121212;border:6px solid #121212;padding:14px 24px;letter-spacing:.02em}
+.comente{font-family:'Bang';font-weight:400;letter-spacing:.03em}
+.kw span{font-family:'Bang';font-weight:400;background:#FFE14D;border:6px solid #121212;padding:.04em .2em;letter-spacing:.03em}
+.fol p{font-family:'Bang';font-weight:400;letter-spacing:.02em}
+.fh{background:#FFE14D;padding:0 .1em}
+.grid i{border-radius:50%;background:#fff;border:5px solid #121212}
+.grid i.on{background:var(--acct)}
+.swipe{font-family:'Bang';font-weight:400;font-size:«38»;background:#fff;color:#121212;border:5px solid #121212;padding:6px 18px}

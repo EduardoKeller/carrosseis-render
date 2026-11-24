@@ -1,0 +1,41 @@
+/* base dos mundos genéricos — cada looks/<nome>.css sobrescreve */
+.panel{position:relative;z-index:3}
+.chandle{position:absolute;left:var(--px);top:calc(var(--pt) - 54px);font:700 «30» 'Bric';color:var(--fg);z-index:9}
+.cstat{display:flex;align-items:flex-end;gap:22px;margin-bottom:«28»}
+.cstat b{font-weight:800;font-size:«220»;line-height:.85;letter-spacing:-.03em;white-space:nowrap}
+.cstat>span{font:700 «36»/1.1 'Bric';max-width:10ch;padding-bottom:6px}
+h1{font-weight:800;line-height:1.02;letter-spacing:-.02em;text-wrap:balance}
+.swipe{margin-top:«40»;display:flex;align-items:center;gap:14px;font:800 «28» 'Bric';letter-spacing:.08em;text-transform:uppercase;align-self:flex-end;color:var(--fg)}
+.swipe svg circle{fill:var(--acc)} .swipe svg path{stroke:var(--on)}
+.lead{font-weight:780;font-size:«76»;line-height:1.04;letter-spacing:-.02em;text-wrap:pretty}
+.rest{font-weight:520;font-size:«54»;line-height:1.2;text-wrap:pretty}
+p+p{margin-top:«40»}
+.big p{font-weight:800;line-height:1;letter-spacing:-.02em;text-wrap:balance}
+.rnum{display:inline-block;font-weight:800;line-height:.9;letter-spacing:-.03em;white-space:nowrap}
+.rtext{font-weight:700;font-size:«62»;line-height:1.1;margin-top:«36»;text-wrap:balance}
+.vtitle{font-weight:800;font-size:«58»;line-height:1.06;margin-bottom:«50»;text-wrap:balance}
+.vrow+.vrow{margin-top:«44»}
+.vlab{font-weight:650;font-size:«38»;color:#333}
+.vnum{font-weight:800;font-size:«150»;line-height:.92;margin-top:4px}
+.vbar{height:«30»;margin-top:«12»;background:rgba(0,0,0,.1)}
+.vbar i{display:block;height:100%}
+.vnote{font-weight:700;font-size:«50»;line-height:1.14;margin-top:«50»}
+.chat{gap:«26»}
+.clab{align-self:flex-start;font:700 «28» 'Bric';margin-bottom:«8»}
+.msg{display:flex;flex-direction:column;max-width:84%}
+.msg.left{align-self:flex-start}.msg.right{align-self:flex-end;align-items:flex-end}
+.msg small{font:700 «28» 'Bric';margin:0 14px 8px}
+.bub{font-weight:600;font-size:«52»;line-height:1.2;padding:28px 36px}
+.ccap{font-weight:800;font-size:«62»;line-height:1.04;margin-top:«30»;text-wrap:balance}
+.clead{font-weight:740;font-size:«52»;line-height:1.1;max-width:19ch;text-wrap:balance}
+.comente{font-weight:800;font-size:«190»;line-height:.9;margin-top:«40»}
+.kw{margin-top:«16»;align-self:flex-start}
+.kw span{display:inline-block;font-weight:800;line-height:1;white-space:nowrap}
+.sub{font-weight:600;font-size:«44»;line-height:1.16;margin-top:«44»;max-width:22ch}
+.fol p{font-weight:800;line-height:1.04;letter-spacing:-.02em;text-wrap:balance}
+.panel .grid{width:100%;margin-bottom:«10»}
+.tl .w{display:inline-block;white-space:nowrap}
+.tl .sp{display:inline-block;width:.32em}
+.tl i{font-style:normal}
+.barcode{display:block;width:62%;height:«70»;margin:«40» auto 0;fill:#121212}
+.bh{position:absolute;inset:0;width:100%;height:100%;z-index:1}

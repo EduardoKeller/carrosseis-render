@@ -1,0 +1,30 @@
+/* PLACAR — painel de embarque (split-flap): cada letra numa plaquinha */
+body{background:#0F1114;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 2px,transparent 2px 6px)}
+.chandle{font:700 «28» 'Bric';letter-spacing:.14em;text-transform:uppercase;color:#9A9EA6}
+.tl i{display:inline-block;min-width:.66em;text-align:center;padding:.05em .05em .02em;margin:0 .028em .07em;border-radius:.07em;color:#F2EFE6;
+  background:linear-gradient(#262a31 0 48.5%,#07080a 48.5% 51.5%,#1d2026 51.5%);box-shadow:0 .04em .06em rgba(0,0,0,.6)}
+.tl .hi i,.cstat .tl i,.rnum .tl i{color:var(--acc)}
+.cstat b{font-weight:760;font-stretch:80%;font-size:«170»;letter-spacing:0}
+.cstat>span{color:#F2EFE6;text-transform:uppercase;letter-spacing:.06em;font-size:«30»}
+h1{font-weight:780;font-stretch:78%;color:#F2EFE6;line-height:1.04}
+.turn{color:var(--acc)}
+.lead{font-weight:760;font-stretch:80%;text-transform:uppercase;color:#F2EFE6;font-size:«80»;line-height:1.02}
+.rest{color:#B9BDC4;font-size:«52»}
+mark{background:none;color:var(--acc);padding:0}
+.big p{font-weight:760;font-stretch:80%;letter-spacing:0;line-height:1.1}
+.rnum{font-weight:760;font-stretch:80%;letter-spacing:0}
+.rtext{color:#F2EFE6;font-weight:650}
+.panel{border-top:3px solid #2a2e35;border-bottom:3px solid #2a2e35;padding:«40» 0}
+.vtitle,.vnote{color:#F2EFE6} .vlab{color:#9A9EA6;text-transform:uppercase;letter-spacing:.08em;font-size:«30»}
+.vnum{font-stretch:80%;color:#F2EFE6!important} .vbar{background:#23262c}
+.bub{background:#1d2026;color:#F2EFE6;border:2px solid #2f333a;border-radius:10px}
+.msg.right .bub{background:var(--acc);color:var(--on);border-color:transparent}
+.msg small,.clab{color:#9A9EA6;text-transform:uppercase;letter-spacing:.1em}
+.ccap{color:#F2EFE6}
+.clead{color:#F2EFE6}.sub{color:#B9BDC4}
+.comente{font-stretch:78%;color:#F2EFE6;text-transform:uppercase;font-size:«150»}
+.kw span{font-weight:760;font-stretch:80%}
+.fol p{color:#F2EFE6;font-stretch:80%;text-transform:none}
+.fh{color:var(--acc)}
+.grid i{border-radius:6px;background:linear-gradient(#262a31 0 48%,#07080a 48% 52%,#1d2026 52%)}
+.grid i.on{background:linear-gradient(var(--acc) 0 48%,#07080a 48% 52%,var(--acc) 52%)}
