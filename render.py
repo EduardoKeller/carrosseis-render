@@ -30,8 +30,20 @@ INK = "#121212"
 PEN = "#1D3FE0"
 
 
+def _norm_hex(h):
+    h = (h or "").strip().lstrip("#")
+    if len(h) == 3 and all(c in "0123456789abcdefABCDEF" for c in h):
+        h = "".join(c * 2 for c in h)
+    if len(h) == 6 and all(c in "0123456789abcdefABCDEF" for c in h):
+        return "#" + h.upper()
+    return None
+
+
 def _lum(h):
-    h = h.lstrip("#")
+    nh = _norm_hex(h)
+    if not nh:
+        return 0.0
+    h = nh.lstrip("#")
     c = [int(h[n:n + 2], 16) / 255 for n in (0, 2, 4)]
     c = [v / 12.92 if v <= .03928 else ((v + .055) / 1.055) ** 2.4 for v in c]
     return .2126 * c[0] + .7152 * c[1] + .0722 * c[2]
@@ -39,7 +51,10 @@ def _lum(h):
 
 def text_acc(acc, bg="#EDEDEA"):
     """cor do pilar escurecida até 4.5:1 sobre fundo claro (texto colorido legível)"""
-    r, g, b = (int(acc[n:n + 2], 16) for n in (1, 3, 5))
+    nh = _norm_hex(acc)
+    if not nh:
+        return INK
+    r, g, b = (int(nh[n:n + 2], 16) for n in (1, 3, 5))
     for k in range(0, 101, 4):
         f = 1 - k / 100
         hx = f"#{int(r * f):02X}{int(g * f):02X}{int(b * f):02X}"
@@ -60,7 +75,7 @@ def esc(t):
 
 
 def stars(t, cls):
-    return re.sub(r"\*\*(.+?)\*\*", rf"<span class='{cls}'>\1</span>", esc(t)).replace("\n", "<br>")
+    return re.sub(r"\*\*(.+?)\*\*", rf"<span class='{cls}'>\1</span>", esc(t).replace("\n", "<br>"))
 
 
 def mark(t):
@@ -95,12 +110,6 @@ def hand_circle(rnd, color, w=7):
         pts.append((50 + 48 * r * math.cos(t) + rnd.uniform(-1, 1), 50 + 45 * r * math.sin(t) + rnd.uniform(-1, 1)))
     return (f"<svg class='hc' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='{_path(pts)}' fill='none' "
             f"stroke='{color}' vector-effect='non-scaling-stroke' style='stroke-width:{w}px' stroke-linecap='round'/></svg>")
-
-
-def hand_under(rnd, color):
-    pts = [(x, 55 + rnd.uniform(-9, 9)) for x in range(0, 101, 10)] + [(x, 78 + rnd.uniform(-8, 8)) for x in range(94, 20, -18)]
-    return (f"<svg class='hu' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='{_path(pts)}' fill='none' "
-            f"stroke='{color}' vector-effect='non-scaling-stroke' style='stroke-width:6px' stroke-linecap='round'/></svg>")
 
 
 def hand_arrow(rnd, color, w=190, h=110):
@@ -160,7 +169,7 @@ body{background:var(--bg);color:var(--fg);font-family:'Bric',sans-serif;position
 .next b{font-size:40px;line-height:1;color:var(--nextc)}
 mark{background:linear-gradient(transparent 10%,#FFE14D 10%,#FFE14D 90%,transparent 90%);color:#121212;padding:0 .14em;
   box-decoration-break:clone}
-.hc,.hu{position:absolute;pointer-events:none;overflow:visible}
+.hc{position:absolute;pointer-events:none;overflow:visible}
 .brush{position:absolute;left:-1%;top:4%;height:98%;z-index:0}
 .cw>:first-child{margin-top:auto}
 .grid{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:calc(18px*var(--s));max-width:100%}
@@ -236,7 +245,6 @@ body{background-color:#FBFAF5;
 .hmk{position:relative;display:inline-block;white-space:nowrap}
 .hmk>span{position:relative;z-index:1}
 .hmk .hc{left:-8%;top:-14%;width:116%;height:128%;z-index:2}
-.hmk .hu{left:-2%;bottom:-.3em;width:104%;height:.42em}
 .cstat{display:flex;align-items:center;gap:30px;margin-bottom:calc(36px*var(--s))}
 .cstat .hmk b{font:800 calc(210px*var(--s))/.9 'Bric';letter-spacing:-.04em;color:#121212;padding:0 .12em}
 .cstat>span:last-child{font:700 calc(54px*var(--s))/1.05 'Hand';color:#1D3FE0;max-width:9ch;transform:rotate(-4deg)}
@@ -260,8 +268,9 @@ mark{background:linear-gradient(transparent 45%,color-mix(in srgb,var(--acc) 60%
 .vrow+.vrow{margin-top:calc(52px*var(--s))}
 .vlab{font-weight:650;font-size:calc(40px*var(--s));color:#2a2a2a}
 .vnum{font-weight:800;font-size:calc(160px*var(--s));line-height:.92;letter-spacing:-.03em;margin-top:6px}
-.vbar{height:calc(44px*var(--s));margin-top:calc(12px*var(--s));border:4px solid #121212;border-radius:10px 14px 9px 12px;padding:5px;transform:rotate(-.6deg)}
-.vbar i{display:block;height:100%;border-radius:6px;background-image:repeating-linear-gradient(-45deg,currentColor 0,currentColor 10px,transparent 10px,transparent 18px)}
+.vbar{height:calc(44px*var(--s));margin-top:calc(12px*var(--s));border:4px solid #121212;border-radius:10px 14px 9px 12px;padding:5px;transform:rotate(-.6deg);overflow:hidden}
+.vbar i{display:block;height:100%;border-radius:6px;background-color:transparent;
+  background-image:repeating-linear-gradient(-45deg,currentColor 0,currentColor 10px,transparent 10px,transparent 18px)}
 .vnote{font-weight:720;font-size:calc(54px*var(--s));line-height:1.14;margin-top:calc(60px*var(--s))}
 .chat{gap:calc(34px*var(--s))}
 .clab{align-self:flex-start;font:700 calc(40px*var(--s)) 'Hand';color:#B32D2D;transform:rotate(-3deg);margin-bottom:calc(6px*var(--s))}
@@ -287,6 +296,7 @@ mark{background:linear-gradient(transparent 45%,color-mix(in srgb,var(--acc) 60%
 # ---------- RECORTE ----------
 CSS_RECORTE = """
 body{background:var(--acc)}
+.next{color:var(--nextc)}
 .scrap{display:inline-block;padding:.06em .22em .1em;margin:.06em .06em;line-height:1;box-shadow:0 10px 18px -10px rgba(0,0,0,.45)}
 .w-a{background:#fff;color:#121212;font-family:'Bric';font-weight:800;font-stretch:80%}
 .w-b{background:#121212;color:#fff;font-family:'Gloock';font-weight:400}
@@ -319,7 +329,7 @@ p+p{margin-top:calc(40px*var(--s))}
 .vrow+.vrow{margin-top:calc(46px*var(--s))}
 .vlab{font-weight:650;font-size:calc(38px*var(--s));color:#3a3a3a}
 .vnum{font:400 calc(150px*var(--s))/.95 'Gloock';margin-top:6px}
-.vbar{height:calc(46px*var(--s));margin-top:calc(12px*var(--s));background:#E8E2D4}
+.vbar{height:calc(46px*var(--s));margin-top:calc(12px*var(--s));background:#E8E2D4;overflow:hidden}
 .vbar i{display:block;height:100%}
 .vnote{font-weight:740;font-size:calc(50px*var(--s));line-height:1.14;margin-top:calc(52px*var(--s))}
 .chat{gap:calc(30px*var(--s))}
@@ -343,7 +353,7 @@ p+p{margin-top:calc(40px*var(--s))}
 
 # ---------- TELA ----------
 CSS_TELA = """
-body{background:radial-gradient(120% 70% at 50% 0%,color-mix(in srgb,var(--acc) 30%,#0B0C10),#0B0C10 70%);color:#fff}
+body{background-color:#0B0C10;background-image:radial-gradient(120% 70% at 50% 0%,color-mix(in srgb,var(--acc) 30%,#0B0C10),#0B0C10 70%);color:#fff}
 .lock{position:absolute;left:0;right:0;top:calc(var(--pt) + 10px);text-align:center;z-index:4}
 .lock b{display:block;font-weight:700;font-stretch:88%;font-size:calc(230px*var(--s));line-height:.9;letter-spacing:-.03em;color:#fff}
 .lock span{display:block;font:600 calc(36px*var(--s)) 'Bric';color:rgba(255,255,255,.75);margin-top:10px}
@@ -387,9 +397,6 @@ p+p{margin-top:calc(38px*var(--s))}
 .vbar i{display:block;height:100%;border-radius:12px}
 .vnote{font-weight:700;font-size:calc(46px*var(--s));line-height:1.14;margin-top:calc(46px*var(--s));color:#fff}
 .chat{gap:calc(18px*var(--s))}
-.ctop{display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:calc(30px*var(--s))}
-.ctop .app{width:calc(96px*var(--s));height:calc(96px*var(--s));border-radius:50%;font-size:calc(40px*var(--s))}
-.ctop span{font:650 calc(30px*var(--s)) 'Bric';color:rgba(255,255,255,.8)}
 .clab{align-self:center;font:600 calc(26px*var(--s)) 'Bric';color:rgba(255,255,255,.55);margin-bottom:10px}
 .msg{display:flex;flex-direction:column;max-width:82%}
 .msg.left{align-self:flex-start}.msg.right{align-self:flex-end;align-items:flex-end}
@@ -400,7 +407,7 @@ p+p{margin-top:calc(38px*var(--s))}
 .ccap{font-weight:760;font-size:calc(62px*var(--s));line-height:1.04;letter-spacing:-.02em;margin-top:calc(40px*var(--s));color:#fff;text-wrap:balance}
 .clead{font-weight:740;font-size:calc(58px*var(--s));line-height:1.08;letter-spacing:-.02em;color:#fff;max-width:18ch;text-wrap:balance}
 .inputbar{display:flex;align-items:center;gap:22px;background:#F7F6F2;border-radius:999px;padding:22px 22px 22px 44px;margin-top:calc(60px*var(--s))}
-.inputbar .typed{flex:1;font-weight:700;font-size:1px;line-height:1.1;color:#121212;white-space:nowrap;overflow:hidden}
+.inputbar .typed{flex:1;min-width:0;font-weight:700;font-size:1px;line-height:1.1;color:#121212;white-space:nowrap;overflow:hidden}
 .inputbar .send{flex:none;width:calc(96px*var(--s));height:calc(96px*var(--s));border-radius:50%;background:var(--acc);display:grid;place-items:center}
 .sub{font-weight:600;font-size:calc(44px*var(--s));line-height:1.16;margin-top:calc(44px*var(--s));color:rgba(255,255,255,.8);max-width:22ch}
 .kwlab{font:650 calc(30px*var(--s)) 'Bric';color:rgba(255,255,255,.6);margin-top:calc(60px*var(--s))}
@@ -426,7 +433,7 @@ def scraps_html(text, rnd, turn_cls="w-t"):
     """manchete em papéis recortados; trecho entre ** usa turn_cls"""
     out = []
     pal = ["w-a", "w-b", "w-a", "w-d", "w-c", "w-a"]
-    parts = re.split(r"(\*\*.+?\*\*)", text or "")
+    parts = re.split(r"(\*\*.+?\*\*)", text or "", flags=re.DOTALL)
     k = 0
     for part in parts:
         turn = part.startswith("**")
@@ -472,7 +479,8 @@ def build(look, data, s, i, total, fmt):
             darkt = s.get("tone") == "dark"
             v.update(bg=dark if darkt else acc, fg="#fff" if darkt else on, hl=acc if darkt else YEL,
                      track="rgba(255,255,255,.22)" if (darkt or on == "#FFFFFF") else "rgba(18,18,18,.18)",
-                     progc="#fff" if (darkt or on == "#FFFFFF") else INK, nextc="#fff" if darkt else on, muted="rgba(255,255,255,.65)" if (darkt or on == "#FFFFFF") else "rgba(18,18,18,.6)")
+                     progc="#fff" if (darkt or on == "#FFFFFF") else INK, nextc="#fff" if darkt else on,
+                     muted="rgba(255,255,255,.65)" if (darkt or on == "#FFFFFF") else "rgba(18,18,18,.6)")
             pill = not darkt
             body = (f"<div class='wrap big{'' if darkt else ' onacc'}'><p data-fit='{int(210 * S)}' style='--hl:{acc if darkt else YEL}'>"
                     f"{stars(s['text'].upper(), 'hi')}</p></div>")
@@ -530,10 +538,9 @@ def build(look, data, s, i, total, fmt):
     elif look == "recorte":
         light_acc = on == "#121212"
         pill = True
-        v.update(bg=acc, fg=INK, muted="rgba(18,18,18,.7)" if light_acc else "rgba(255,255,255,.85)",
-                 track="rgba(18,18,18,.22)" if light_acc else "rgba(255,255,255,.35)", progc="#121212" if light_acc else "#fff",
-                 nextc="#121212" if light_acc else "#fff")
         nextfg = "#121212" if light_acc else "#fff"
+        v.update(bg=acc, fg=INK, muted="rgba(18,18,18,.7)" if light_acc else "rgba(255,255,255,.85)",
+                 track="rgba(18,18,18,.22)" if light_acc else "rgba(255,255,255,.35)", progc=nextfg, nextc=nextfg)
         tp = (f"<div class='tape' style='left:{rnd.randint(140, 400)}px;top:{rnd.randint(40, 90) + (110 if tall else 0)}px;"
               f"transform:rotate({rnd.uniform(-12, 12):.0f}deg)'></div>")
         if k == "cover":
@@ -570,8 +577,6 @@ def build(look, data, s, i, total, fmt):
             show_next = False
         else:
             body = common_block(k, s, rnd, look, acc, S)
-            if k == "chat":
-                pass
         v["fg"] = nextfg if k in ("cover", "big", "follow") else v["fg"]
 
     # ------------------------------ TELA ------------------------------
@@ -599,10 +604,15 @@ def build(look, data, s, i, total, fmt):
                     f"<div class='rnum' data-fitw='{int(400 * S)}'>{esc(s['number'])}</div><p class='rtext'>{mark(s.get('text', ''))}</p></div></div>")
         elif k == "versus":
             note = f"<p class='vnote'>{mark(s.get('note', ''))}</p>" if s.get("note") else ""
-            rows = "".join(
-                f"<div class='vrow'><div class='vlab'><span>{esc(it['label'])}</span><b style='color:{text_acc(acc) if it.get('color', INK).upper() == acc.upper() else it.get('color', INK)}'>"
-                f"{esc(it.get('display', str(int(float(it['value']))) + '%'))}</b></div><div class='vbar'><i style='width:{max(float(it['value']), 2.5)}%;"
-                f"background:{it.get('color', INK)}'></i></div></div>" for it in s["items"])
+            rows = ""
+            for it in s["items"]:
+                val = float(it["value"])
+                pct = min(max(val, 2.5), 100.0)
+                c = it.get("color", INK)
+                ct = text_acc(c) if (_norm_hex(c) == _norm_hex(acc)) else c
+                rows += (f"<div class='vrow'><div class='vlab'><span>{esc(it['label'])}</span>"
+                         f"<b style='color:{ct}'>{esc(it.get('display', str(int(val)) + '%'))}</b></div>"
+                         f"<div class='vbar'><i style='width:{pct}%;background:{c}'></i></div></div>")
             body = f"<div class='wrap'><div class='vpanel'><p class='vtitle'>{mark(s.get('title', ''))}</p>{rows}</div>{note}</div>"
         elif k == "chat":
             lab = f"<p class='clab'>{esc(s.get('label', ''))}</p>" if s.get("label") else ""
@@ -631,7 +641,7 @@ def build(look, data, s, i, total, fmt):
     v.setdefault("accl", acc)
     v.setdefault("acc2", acc)
     prog = ("<div class='prog'>" + "".join(f"<i class='{'on' if n < i else ''}'></i>" for n in range(total)) + "</div>") if show_prog else ""
-    nxt = f"<div class='next'>continua<b>→</b></div>" if (show_next and i < total) else ""
+    nxt = "<div class='next'>continua<b>→</b></div>" if (show_next and i < total) else ""
     hd = f"<div class='hd{' pill' if pill else ''}'>{handle}</div>" if show_hd else ""
     return body + hd + prog + nxt, v, grain
 
@@ -765,11 +775,13 @@ def versus_inner(s, look, acc=""):
     rows = ""
     for it in s["items"]:
         val = float(it["value"])
+        pct = min(max(val, 2.5), 100.0)
         c = it.get("color", INK)
-        ct = text_acc(c) if c.upper() == acc.upper() else c
+        ct = text_acc(c) if (_norm_hex(c) == _norm_hex(acc)) else c
+        fill = "" if look == "caderno" else f"background-color:{c};"
         rows += (f"<div class='vrow' style='color:{c}'><div class='vlab'>{esc(it['label'])}</div>"
                  f"<div class='vnum' style='color:{ct}'>{esc(it.get('display', str(int(val)) + '%'))}</div>"
-                 f"<div class='vbar'><i style='width:{max(val, 2.5)}%;background-color:{c}'></i></div></div>")
+                 f"<div class='vbar'><i style='width:{pct}%;{fill}'></i></div></div>")
     note = f"<p class='vnote'>{mark(s.get('note', ''))}</p>" if s.get("note") else ""
     return f"<p class='vtitle'>{mark(s.get('title', ''))}</p>{rows}{note}"
 
@@ -799,14 +811,27 @@ FIT_JS = """
 <script>
 document.fonts.ready.then(()=>{
   document.querySelectorAll('[data-fit]').forEach(el=>{
-    const box=el.closest('.wrap,.cwrap,.notif')||el.parentElement; let s=+el.dataset.fit; el.style.fontSize=s+'px';
+    const box=el.closest('.wrap,.cwrap')||el.parentElement; let s=+el.dataset.fit; el.style.fontSize=s+'px';
     const over=()=>box.scrollHeight>box.clientHeight+14||el.scrollWidth>el.clientWidth+(el.classList.contains('title')?40:1)||document.body.scrollHeight>document.body.clientHeight+1;
     while(s>34 && over()){s-=2;el.style.fontSize=s+'px';}
   });
   document.querySelectorAll('[data-fitw]').forEach(el=>{
-    const wrap=el.closest('.wrap'); const lim=(wrap?wrap.clientWidth:900)-PXX*2-60; let s=+el.dataset.fitw; el.style.fontSize=s+'px';
-    const w=()=>Math.max(el.scrollWidth,el.offsetWidth);
-    while(s>50 && w()>lim){s-=2;el.style.fontSize=s+'px';}
+    let s=+el.dataset.fitw; el.style.fontSize=s+'px';
+    if(el.classList.contains('typed')){
+      while(s>36 && el.scrollWidth>el.clientWidth){s-=2;el.style.fontSize=s+'px';}
+    }else{
+      const box=el.closest('.widget,.card,.panel,.wrap')||el.parentElement;
+      const cs=getComputedStyle(box);
+      const pad=parseFloat(cs.paddingLeft)+parseFloat(cs.paddingRight);
+      let lim=box.clientWidth-pad-40;
+      const inner=el.closest('.rbox,.kw');
+      if(inner){
+        const ics=getComputedStyle(inner);
+        lim-=parseFloat(ics.paddingLeft)+parseFloat(ics.paddingRight);
+      }
+      const w=()=>Math.max(el.scrollWidth,el.offsetWidth);
+      while(s>42 && w()>lim){s-=2;el.style.fontSize=s+'px';}
+    }
     const b=el.parentElement.querySelector('.brush'); if(b) b.style.width=(el.offsetWidth*1.02)+'px';
   });
   document.body.dataset.ready='1';
@@ -839,7 +864,7 @@ def page(data, s, i, total, fmt, font_dir, look):
     pt, pb, px = (250, 330, 76) if tall else (100, 150, 76)
     pil = PILLARS[data["pilar"]]
     body, v, grain = build(look, data, s, i, total, fmt)
-    fd = Path(font_dir)
+    fd = Path(font_dir).resolve()
     bric = fd / "@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-standard-normal.woff2"
     kal = fd / "@fontsource/kalam/files/kalam-latin-700-normal.woff2"
     glk = fd / "@fontsource/gloock/files/gloock-latin-400-normal.woff2"
@@ -852,20 +877,22 @@ def page(data, s, i, total, fmt, font_dir, look):
     for fam, rel, wt in EXTRA_FONTS:
         fonts += f"@font-face{{font-family:'{fam}';src:url('{(fd / rel).as_uri()}') format('woff2');font-weight:{wt}}}"
     k = s.get("type", "story")
-    # fundo especial por slide (impacto usa cor do pilar/escuro em alguns tipos)
-    extra = ""
-    if look == "impacto" and k in ("cover", "reveal", "follow") or (look == "impacto" and k == "big"):
-        extra = "body{background:var(--bg)}"
-    if look == "caderno" and k == "big":
-        extra = "body{background-color:color-mix(in srgb,var(--acc) 22%,#FBFAF5)}"
+    extra = "body{background-color:color-mix(in srgb,var(--acc) 22%,#FBFAF5)}" if (look == "caderno" and k == "big") else ""
     return (f"<!doctype html><html lang='pt-BR'><head><meta charset='utf-8'><style>{fonts}{root}{BASE_CSS}{look_css(look)}{extra}</style>"
-            f"</head><body class='{'grain' if grain else ''} look-{look} t-{k}'>{body}{FIT_JS.replace('PXX', str(px))}</body></html>")
+            f"</head><body class='{'grain' if grain else ''} look-{look} t-{k}'>{body}{FIT_JS}</body></html>")
 
 
 def main():
+    if len(sys.argv) < 3:
+        sys.exit("Uso: python3 render.py carrossel.json pasta_saida")
     spec, out = Path(sys.argv[1]), Path(sys.argv[2])
     font_dir = os.environ.get("FONT_DIR", str(Path.cwd() / "node_modules"))
     data = json.loads(spec.read_text(encoding="utf-8"))
+    if data.get("pilar") not in PILLARS:
+        pilar_invalido = data.get("pilar")
+        fallback = next(iter(PILLARS))
+        print(f"pilar desconhecido '{pilar_invalido}', usando '{fallback}'", file=sys.stderr)
+        data["pilar"] = fallback
     look = data.get("look", "impacto")
     if look not in LOOKS:
         print(f"look desconhecido '{look}', usando impacto", file=sys.stderr)
@@ -873,9 +900,9 @@ def main():
     slug = data.get("slug", spec.stem)
     total = len(data["slides"])
     out.mkdir(parents=True, exist_ok=True)
-    tmp = Path(tempfile.mkdtemp())
     files = []
-    with sync_playwright() as p:
+    with tempfile.TemporaryDirectory() as tmp_dir, sync_playwright() as p:
+        tmp = Path(tmp_dir)
         exe = next((c for c in ["/usr/bin/google-chrome", "/usr/bin/chromium", "/usr/bin/chromium-browser"] if os.path.exists(c)), None)
         args = ["--no-sandbox", "--allow-file-access-from-files"]
         b = p.chromium.launch(executable_path=exe, args=args) if exe else p.chromium.launch(args=args)
